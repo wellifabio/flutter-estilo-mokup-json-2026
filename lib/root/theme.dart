@@ -34,5 +34,6 @@ abstract class AppTheme {
         elevation: WidgetStatePropertyAll(8.0),
       ),
     ),
+    canvasColor: AppColors.p2,
   );
 }

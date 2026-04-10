@@ -14,6 +14,8 @@ class _HomeState extends State<Home> {
   List<dynamic> produtos = [];
   int indice = 0;
 
+  ValueChanged<dynamic>? get onChanged => null;
+
   @override
   void initState() {
     super.initState();
@@ -27,18 +29,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void vaiEvorta(int controle) {
-    if (controle == 1) {
-      setState(() {
-        indice++;
-      });
-    } else {
-      setState(() {
-        indice--;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +36,87 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 20,
           children: [
-            Text(produtos.isNotEmpty ? produtos[indice]['nome'] : "0"),
+            DropdownButton<dynamic>(
+              value: produtos.isNotEmpty ? produtos[indice] : null,
+              items: produtos
+                  .map(
+                    (produto) => DropdownMenuItem<dynamic>(
+                      value: produto,
+                      child: Text(produto['nome']),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  indice = produtos.indexOf(value);
+                });
+              },
+            ),
+            Text(
+              produtos.isNotEmpty
+                  ? produtos[indice]['nome']
+                  : "Nome do produto",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  spacing: 10,
+                  children: [
+                    produtos.isNotEmpty
+                        ? Image.network(
+                            produtos[indice]['img'],
+                            width: 200,
+                            errorBuilder:
+                                (
+                                  BuildContext context,
+                                  Object exception,
+                                  StackTrace? stackTrace,
+                                ) =>
+                                    Image.asset('assets/icone.png', width: 200),
+                          )
+                        : Image.asset(
+                            'assets/icone.png',
+                            height: 200,
+                            width: 200,
+                          ),
+                    Text(
+                      produtos.isNotEmpty
+                          ? produtos[indice]['descricao']
+                          : "Descrição do produto",
+                    ),
+                    Text(
+                      produtos.isNotEmpty
+                          ? "R\$ ${produtos[indice]['preco'].toStringAsFixed(2).replaceAll('.', ',')}"
+                          : "R\$ 0.00",
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
-                  onPressed: indice > 0 ? () => vaiEvorta(0) : null,
+                  onPressed: indice > 0
+                      ? () => setState(() {
+                          indice--;
+                        })
+                      : null,
                   child: Text("Anterior"),
                 ),
                 ElevatedButton(
                   onPressed: indice < produtos.length - 1
-                      ? () => vaiEvorta(1)
+                      ? () => setState(() {
+                          indice++;
+                        })
                       : null,
                   child: Text("Proximo"),
                 ),
