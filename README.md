@@ -106,6 +106,7 @@ Crie um novo aplicativo chamado "flutter_funcionarios" que renderize com um menu
 ```
 - No JSON acima acrescente um campo **"avatar":"",** e pesquise imagens na web copiando o endereço das imagens para preencher.
 - O App deve ter duas telas, uma Splash com algum efeito de movimento e uma tela Home que carregue os usuários e navegue entre eles uma a um.
+- Altere a estilização, paleta de cores e Widgets
 
 ## Entregas
 crie um repositório público do github e hospede com prints das telas, tecnologias e instruções de como testar em README.md conforme este exemplo. Apresente ao seu professor.
