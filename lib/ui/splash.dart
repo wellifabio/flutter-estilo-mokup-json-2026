@@ -8,9 +8,66 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
-  void irParaHome() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+class _SplashState extends State<Splash> with TickerProviderStateMixin {
+  late AnimationController _vertical, _horizontal;
+  double _x = 0, _y = -500;
+
+  @override
+  void initState() {
+    super.initState();
+    movimentos();
+    entrada();
+  }
+
+  void movimentos() {
+    _vertical =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 800))
+          ..addListener(() {
+            setState(() {
+              _y = _vertical.value * 500 - 500;
+            });
+          });
+
+    _horizontal =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 800))
+          ..addListener(() {
+            setState(() {
+              _x = _horizontal.value * 300;
+            });
+          });
+  }
+
+  void resetAnimation() {
+    _horizontal.reset();
+    _vertical.reset();
+    setState(() {
+      _x = 0;
+      _y = -500;
+    });
+  }
+
+  void entrada() {
+    _vertical.forward();
+  }
+
+  void saida() {
+    _horizontal.forward().then((value) => irParaHome());
+  }
+
+  void irParaHome() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Home()),
+    );
+    resetAnimation();
+    entrada();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _vertical.dispose();
+    _horizontal.dispose();
   }
 
   @override
@@ -22,8 +79,11 @@ class _SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 40,
           children: [
-            Image.asset('assets/icone.png', width: 150),
-            ElevatedButton(onPressed: irParaHome, child: Text("Entrar")),
+            Transform.translate(
+              offset: Offset(_x, _y),
+              child: Image.asset('assets/icone.png', width: 150),
+            ),
+            ElevatedButton(onPressed: saida, child: Text("Entrar")),
           ],
         ),
       ),

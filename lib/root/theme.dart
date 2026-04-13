@@ -16,7 +16,7 @@ abstract class AppTheme {
     textTheme: TextTheme(
       titleMedium: TextStyle(
         color: AppColors.p4,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
       bodyMedium: TextStyle(color: AppColors.p4, fontSize: 14),

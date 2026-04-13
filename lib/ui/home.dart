@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:produtos/root/pallet.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -38,32 +39,57 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 20,
           children: [
-            DropdownButton<dynamic>(
-              value: produtos.isNotEmpty ? produtos[indice] : null,
-              items: produtos
-                  .map(
-                    (produto) => DropdownMenuItem<dynamic>(
-                      value: produto,
-                      child: Text(produto['nome']),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  indice = produtos.indexOf(value);
-                });
-              },
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: AppColors.p1,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.p2,
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: DropdownButton<dynamic>(
+                borderRadius: BorderRadius.circular(8),
+                isExpanded: true,
+                underline: const SizedBox.shrink(),
+                value: produtos.isNotEmpty ? produtos[indice] : null,
+                items: produtos
+                    .map(
+                      (produto) => DropdownMenuItem<dynamic>(
+                        value: produto,
+                        child: Text(produto['nome']),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    indice = produtos.indexOf(value);
+                  });
+                },
+              ),
             ),
             Text(
               produtos.isNotEmpty
                   ? produtos[indice]['nome']
                   : "Nome do produto",
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.p2,
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
