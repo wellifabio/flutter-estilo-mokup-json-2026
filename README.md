@@ -27,9 +27,39 @@ Exemplo de um app flutter que **abre dados Mockup** JSON, uma lista de produtos 
 - 4 Escolha navegador ou um emulador para testar
 - O projeto irá abrir a tela de Splash com uma animação, preencha seu nome e clique em entrar.
 
+## Obs:
+Perceba que há uma pasta assets/mockup com um arquivo produtos.json
+- Este arquivo possui uma lista de produtos e é aberto pelo App e seus dados exibidos na tela home, com um botão próximo e anterior.
+- Dentro da pasta lib, possuem dois arquivos, pallet.dart e theme.dart com a pelata de cores e o tema para a maior parte dos widgets do App.
+- A lista de produtos como mockup JSON, futiramente será substituida por dados de uma API, como está local então no arquivo pubspec.yaml o caminho deve ser indicado
+```yaml
+name: produtos
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/mockup/
+```
+
 ## Aividades
-Crie um novo aplicativo chamado "flutter_funcionarios" que renderize com um menu dropDown o arquivo de Modkup funcionarios.jason contendo os dados abaixo:
-- funcionarios.json
+Crie um **novo aplicativo** chamado "flutter_funcionarios" que renderize o arquivo de Modkup funcionarios.json contendo os dados abaixo, em uma tela semelhante a deste exemplo com um container e possua um menu dropDown:
+- assets/mockup/funcionarios.json
 ```json
 [
   {
@@ -104,9 +134,11 @@ Crie um novo aplicativo chamado "flutter_funcionarios" que renderize com um menu
   }
 ]
 ```
-- No JSON acima acrescente um campo **"avatar":"",** e pesquise imagens na web copiando o endereço das imagens para preencher.
-- O App deve ter duas telas, uma Splash com algum efeito de movimento e uma tela Home que carregue os usuários e navegue entre eles uma a um.
-- Altere a estilização, paleta de cores e Widgets
+- No JSON acima acrescente um campo **"avatar":"",** para cada funcionário, pesquisando imagens na web copiando seus endereços para preencher o campo.
+- O App deve ter duas telas:
+  - uma **Splash** com algum efeito de movimento, escala ou opacidade, diferente deste exemplo
+  - e uma tela **Home** que carregue os usuários e navegue entre eles um a um.
+- Altere a estilização dos **Widgets** (theme.dart) e a paleta de cores (pallet.dart).
 
 ## Entregas
 crie um repositório público do github e hospede com prints das telas, tecnologias e instruções de como testar em README.md conforme este exemplo. Apresente ao seu professor.
