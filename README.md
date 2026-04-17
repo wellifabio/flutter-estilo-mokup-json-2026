@@ -31,7 +31,7 @@ Exemplo de um app flutter que **abre dados Mockup** JSON, uma lista de produtos 
 Perceba que há uma pasta assets/mockup com um arquivo produtos.json
 - Este arquivo possui uma lista de produtos e é aberto pelo App e seus dados exibidos na tela home, com um botão próximo e anterior.
 - Dentro da pasta lib, possuem dois arquivos, pallet.dart e theme.dart com a pelata de cores e o tema para a maior parte dos widgets do App.
-- A lista de produtos como mockup JSON, futiramente será substituida por dados de uma API, como está local então no arquivo pubspec.yaml o caminho deve ser indicado
+- A lista de produtos como mockup JSON, futuramente será substituida por dados de uma API, como está local então no arquivo pubspec.yaml o caminho deve ser indicado
 ```yaml
 name: produtos
 description: "A new Flutter project."
